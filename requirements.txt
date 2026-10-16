@@ -1,0 +1,21 @@
+# Python 3.11 (the bytecode that used to be committed was cpython-311, and the
+# IDE config pinned a Python 3.11 SDK). Versions are not pinned: the repository
+# history contains no lock file or environment export to read them from.
+numpy
+pandas
+scipy
+matplotlib
+statsmodels
+arch
+cvxopt
+
+# Excel readers used by the notebooks (.xls via xlrd, .xlsx via openpyxl)
+xlrd
+openpyxl
+
+# Notebooks
+jupyter
+
+# Optional. Only notebooks/04_garch_oil_and_spread.ipynb uses it, to cross-check
+# the GARCH fits against R's rugarch. The stored run shows it was not installed.
+# rpy2

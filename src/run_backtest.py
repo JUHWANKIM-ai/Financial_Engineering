@@ -1,12 +1,12 @@
-from ARIMA import *
-from Markowitz import *
+from arima import *
+from markowitz import *
 
 if __name__ == "__main__":
     if True:
         # Bring data & and I choose the number of firms to invest as twenty.
         n = 20
-        input_dir = "../Database"
-        file = "dataset.xlsx"
+        input_dir = "../data"
+        file = "krx_monthly_close.xlsx"
         df = pd.read_excel(os.path.join(input_dir, file))
         df.drop(index=0, inplace=True)
         df['Symbol'] = pd.to_datetime(df['Symbol'])
@@ -21,7 +21,7 @@ if __name__ == "__main__":
         mom_data = pd.DataFrame(mom_data)
 
         # Bring KOSPI data to compare with Fund-K.
-        file = "Benchmark.csv"
+        file = "kospi_monthly.csv"
         benchmark = pd.read_csv(os.path.join(input_dir, file))
         benchmark = benchmark.sort_values(by='Date', ascending=True)
         benchmark.set_index('Date', inplace=True)
@@ -76,8 +76,8 @@ if __name__ == "__main__":
                 var_df.loc[var_df.index[i], top_20_df.columns[j]] = float(var)
 
         # I checked whether it goes successfully or not and no problem.
-        var_df.to_csv('../Files/var_df.csv')
-        return_df.to_csv('../Files/return_df.csv')
+        var_df.to_csv('../results/var_df.csv')
+        return_df.to_csv('../results/return_df.csv')
 
     portfolio = True
     if portfolio:
@@ -99,9 +99,9 @@ if __name__ == "__main__":
             sol_df.loc[var_df.index[i], indexes_with_values] = optimal.sol
 
         # I checked whether it goes successfully or not and no problem.
-        sol_df.to_csv('../Files/sol_df.csv')
+        sol_df.to_csv('../results/sol_df.csv')
         optimal.calculate_return(sol_df, Plot=True)
-        optimal.profit.to_csv('../Files/profit_df.csv')
+        optimal.profit.to_csv('../results/profit_df.csv')
 
     portfolio_analysis = True
     if portfolio_analysis:
@@ -144,4 +144,4 @@ if __name__ == "__main__":
         calmar_ratio.iloc[0, :] = calmar
         result = pd.concat([result, calmar_ratio], axis=0)
 
-        result.to_csv('../Files/Evaluation_Metric.csv')
+        result.to_csv('../results/evaluation_metric.csv')

@@ -322,8 +322,8 @@ class ARIMA:
 
 
 if __name__ == "__main__":
-    input_dir = "../Files"
-    file = "dataset.xlsx"
+    input_dir = "../data"
+    file = "krx_monthly_close.xlsx"
     df = pd.read_excel(os.path.join(input_dir, file))
     df.drop(index=0, inplace=True)
     df['Symbol'] = pd.to_datetime(df['Symbol'])
